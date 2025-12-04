@@ -136,8 +136,6 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-reader)
 
 (require 'init-dict)
-(require 'init-docker)
-(require 'init-player)
 (require 'init-utils)
 
 ;; Programming
@@ -145,7 +143,6 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-check)
 (require 'init-lsp)
 (require 'init-dap)
-(require 'init-ai)
 
 (require 'init-prog)
 (require 'init-elisp)
@@ -156,6 +153,7 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-ruby)
 (require 'init-elixir)
 (require 'init-web)
+(require 'init-evil)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init.el ends here

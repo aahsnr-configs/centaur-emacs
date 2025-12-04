@@ -112,7 +112,23 @@
   :hook (after-init . doom-modeline-mode)
   :init
   (setq doom-modeline-icon centaur-icon
-        doom-modeline-minor-modes t)
+        doom-modeline-minor-modes nil)
+
+  (setq doom-modeline-bar-width 3
+        doom-modeline-github nil
+        doom-modeline-mu4e nil
+        doom-modeline-minor-modes nil
+        doom-modeline-major-mode-icon nil
+        doom-modeline-buffer-file-name-style 'relative-from-project)
+  :config
+  (setq doom-modeline-height 25
+        doom-modeline-column-zero-based nil
+        doom-modeline-bar-width 3
+        doom-modeline-buffer-file-size nil
+        doom-modeline-buffer-encoding nil
+        doom-modeline-percent-position nil
+        doom-modeline-vcs-icon t
+        doom-modeline-vcs-max-length 0)
   :bind (:map doom-modeline-mode-map
          ("C-<f6>" . doom-modeline-hydra/body))
   :pretty-hydra

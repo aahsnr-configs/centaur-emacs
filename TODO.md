@@ -11,33 +11,33 @@
 ## Files/Modules - Centaur Emacs
 - [ ] init.el [Changed]
 - [ ] init-ai.el
-- [x] init-base.el
+- [x] init-base.el [Changed visible-bell back to t]
 - [x] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
-- [x] init-check.el [Changed]
+- [x] init-check.el [Changed: flymake -> flycheck]
     - [ ] replace flymake with flycheck
-- [-] init-completion.el
+- [-] init-completion.el [Changed the most]
     - [ ] May need to change certain keybindings
-- [x] init-const.el
-- [x] init-custom.el
+- [x] init-const.el [Unchanged]
+- [x] init-custom.el [Changed: default theme: tokyo-night]
 - [ ] init-dap.el
 - [x] init-dashboard.el
 - [ ] init-dict.el
 - [x] init-dired.el
 - [ ] init-docker.el
-- [-] init-edit.el
+- [-] init-edit.el [Changed: Removed ace-pinyin]
     - [ ] Use doom emacs like keybindings and general keybindings
     - [ ] Replace flyspell with jinx
     - [ ] Replace vundo with undo-fu-session and edit to evil to use it
 - [x] init-elisp.el
 - [ ] init-elixir.el
 - [ ] init-eshell.el
-- [ ] init-evil.el
-- [x] init-funcs.el
+- [ ] init-evil.el [Note: Add scimax-evil module instead]
+- [x] init-funcs.el [Unchanged]
 - [ ] init-go.el
 - [x] init-highlight.el
-- [-] init-hydra.el
+- [-] init-hydra.el [Unchanged for Now]
      - [ ] change the keybinding for toggles-body/hydra
 - [-] init-ibuffer.el
      - [ ] change keybinding for launching ibuffer
@@ -47,7 +47,7 @@
 - [x] init-markdown.el
 - [-] init-org.el
      - [ ] need to make a lot of changes suited to my needs
-- [x] init-package.el
+- [x] init-package.el []
 - [ ] init-player.el
 - [ ] init-prog.el
 - [x] init-python.el
@@ -60,7 +60,7 @@
 - [-] init-treemacs.el
      - [ ] add doom emacs like or mnemonic keybindings using general.el
      - [ ] fix weird fonts in treemacs side window
-- [-] init-ui.el
+- [-] init-ui.el [Changed a lot]
       - [ ] set doom like keybindings for default-text-scale
 - [x] init-utils.el
 - [x] init-vcs.el
@@ -75,6 +75,7 @@
 - [ ] words.el
 - [ ] scimax-md.el
 - [ ] scimax-lob.el
+- [ ] scimax-evil
 
 # Issue
-- [ ] **Important**: eval-when-compile error - probably due to a missing required module in *init.el*
+- [ ] **Important**: eval-when-compile error - probably due to a missing required module in *init.el* - this is apparently not the cause

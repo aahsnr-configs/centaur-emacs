@@ -31,7 +31,8 @@
      - [ ] change keybinding for launching ibuffer
 - [-] init-kill-ring.el
 - [ ] init-lsp.el
-- [ ] init-markdown.el
+     - [ ] make sure it does not conflict with scimax
+- [x] init-markdown.el
 - [ ] init-org.el
 - [x] init-package.el
 - [ ] init-player.el
@@ -43,11 +44,15 @@
 - [ ] init-shell.el
 - [-] init-snippet.el
      - [ ] do I need eglot integration using yasnippet-capf
-- [ ] init-treemacs.el
+- [-] init-treemacs.el
+     - [ ] add doom emacs like or mnemonic keybindings using general.el
+     - [ ] fix weird fonts in treemacs side window
 - [-] init-ui.el
       - [ ] set doom like keybindings for default-text-scale
 - [ ] init-utils.el
 - [ ] init-vcs.el
 - [ ] init-web.el
-- [ ] init-window.el
-- [ ] init-workspace.el
+- [-] init-window.el
+      - [ ] integrate with flycheck instead of flymake
+      - [ ] add evil inspired keybindings for window management
+- [x] init-workspace.el

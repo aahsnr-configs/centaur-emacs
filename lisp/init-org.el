@@ -193,19 +193,6 @@ prepended to the element after the #+HEADER: tag."
       (plantuml   . t))
     "Alist of org ob languages.")
 
-  (use-package ob-go
-    :init (cl-pushnew '(go . t) load-language-alist))
-
-  (use-package ob-powershell
-    :init (cl-pushnew '(powershell . t) load-language-alist))
-
-  (use-package ob-rust
-    :init (cl-pushnew '(rust . t) load-language-alist))
-
-  ;; Install: npm install -g @mermaid-js/mermaid-cli
-  (use-package ob-mermaid
-    :init (cl-pushnew '(mermaid . t) load-language-alist))
-
   (org-babel-do-load-languages 'org-babel-load-languages
                                load-language-alist))
 
@@ -236,11 +223,6 @@ prepended to the element after the #+HEADER: tag."
   (org-appear-manual-linger t)
   (org-appear-delay 0.5))
 
-;; Table of contents
-(use-package toc-org
-  :diminish
-  :hook (org-mode . toc-org-mode))
-
 ;; Preview
 (use-package org-preview-html
   :after org
@@ -250,40 +232,6 @@ prepended to the element after the #+HEADER: tag."
          ("C-c C-h" . org-preview-html-mode))
   :init (when (xwidget-workable-p)
           (setq org-preview-html-viewer 'xwidget)))
-
-;; Presentation
-(if emacs/>=29.2p
-    (use-package dslide
-      :after org
-      :diminish
-      :bind (:map org-mode-map
-             ("s-<f7>" . dslide-deck-start)))
-  (use-package org-tree-slide
-    :after org
-    :diminish
-    :bind (:map org-mode-map
-           ("s-<f7>" . org-tree-slide-mode)
-           :map org-tree-slide-mode-map
-           ("<left>" . org-tree-slide-move-previous-tree)
-           ("<right>" . org-tree-slide-move-next-tree)
-           ("S-SPC" . org-tree-slide-move-previous-tree)
-           ("SPC" . org-tree-slide-move-next-tree))
-    :init (setq org-tree-slide-skip-outline-level 3)))
-
-;; Pomodoro
-(use-package org-pomodoro
-  :after org
-  :diminish
-  :custom-face
-  (org-pomodoro-mode-line ((t (:inherit warning))))
-  (org-pomodoro-mode-line-overtime ((t (:inherit error))))
-  (org-pomodoro-mode-line-break ((t (:inherit success))))
-  :bind (:map org-mode-map
-         ("C-c C-x m" . org-pomodoro))
-  :init (with-eval-after-load 'org-agenda
-          (bind-keys :map org-agenda-mode-map
-            ("K" . org-pomodoro)
-            ("C-c C-x m" . org-pomodoro))))
 
 ;; Roam
 (when (and (fboundp 'sqlite-available-p) (sqlite-available-p))

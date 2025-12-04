@@ -63,36 +63,36 @@
     :init (setq treesit-fold-indicators-priority -1)))
 
 ;;; Commented out in favor of lsp-mode stuff
-;; Show function arglist or variable docstring
-;; (use-package eldoc
-;;   :ensure nil
-;;   :diminish
-;;   :config
-;;   (when (childframe-workable-p)
-;;     (use-package eldoc-mouse
-;;       :diminish
-;;       :bind (:map eldoc-mouse-mode-map
-;;              ("C-h ." . eldoc-mouse-pop-doc-at-cursor))
-;;       :hook (eglot-managed-mode emacs-lisp-mode)
-;;       :init (setq eldoc-mouse-posframe-border-color (face-background 'posframe-border nil t))
-;;       :config
-;;       (tooltip-mode -1)                 ; Conflict with `track-mouse'
-;;       (add-to-list 'eldoc-mouse-posframe-override-parameters
-;;                    `(background-color . ,(face-background 'tooltip nil t))))))
+;;; Show function arglist or variable docstring
+(use-package eldoc
+  :ensure nil
+  :diminish
+  :config
+  (when (childframe-workable-p)
+    (use-package eldoc-mouse
+      :diminish
+      :bind (:map eldoc-mouse-mode-map
+             ("C-h ." . eldoc-mouse-pop-doc-at-cursor))
+      :hook (eglot-managed-mode emacs-lisp-mode)
+      :init (setq eldoc-mouse-posframe-border-color (face-background 'posframe-border nil t))
+      :config
+      (tooltip-mode -1)                 ; Conflict with `track-mouse'
+      (add-to-list 'eldoc-mouse-posframe-override-parameters
+                   `(background-color . ,(face-background 'tooltip nil t))))))
 
-;; ;; Cross-referencing commands
-;; (use-package xref
-;;   :autoload xref-show-definitions-completing-read
-;;   :bind (("M-g ." . xref-find-definitions)
-;;          ("M-g ," . xref-go-back))
-;;   :init
-;;   ;; Use faster search tool
-;;   (when (executable-find "rg")
-;;     (setq xref-search-program 'ripgrep))
+;; Cross-referencing commands
+(use-package xref
+  :autoload xref-show-definitions-completing-read
+  :bind (("M-g ." . xref-find-definitions)
+         ("M-g ," . xref-go-back))
+  :init
+  ;; Use faster search tool
+  (when (executable-find "rg")
+    (setq xref-search-program 'ripgrep))
 
-;;   ;; Select from xref candidates in minibuffer
-;;   (setq xref-show-definitions-function #'xref-show-definitions-completing-read
-;;         xref-show-xrefs-function #'xref-show-definitions-completing-read))
+  ;; Select from xref candidates in minibuffer
+  (setq xref-show-definitions-function #'xref-show-definitions-completing-read
+        xref-show-xrefs-function #'xref-show-definitions-completing-read))
 
 ;; ;; Code styles
 ;; Run commands quickly
@@ -111,6 +111,10 @@
   (with-eval-after-load 'eglot
     (add-to-list 'eglot-server-programs
                  '(fish-mode . ("fish-lsp" "start")))))
+
+
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
 
 (provide 'init-prog)
 

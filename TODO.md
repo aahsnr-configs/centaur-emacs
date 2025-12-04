@@ -1,10 +1,21 @@
-- [ ] change default toggles-hydra/body keybinding
+# TODOs
+## Pretasks
+- [ ] **Centaur Emacs** Need to determine which files I have changed and which modules I have omitted; compare with fork for the task
+
+## Core Tasks for Centaur Emacs
+- [ ] Use both flycheck, apheleia with lsp-mode; keep eglot in init-lsp.el to avoid errors
+- [ ] Integrate modules from scimax - these modules must not be changed
+- [ ] Completely refactor init-org.el module making sure it integrates with scimax modules
+- [ ] Create an init-keymaps.el module and start replacing keybindings in centaur emacs using general.el
+
+## Files/Modules - Centaur Emacs
+- [ ] init.el [Changed]
 - [ ] init-ai.el
 - [x] init-base.el
 - [x] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
-- [x] init-check.el
+- [x] init-check.el [Changed]
     - [ ] replace flymake with flycheck
 - [-] init-completion.el
     - [ ] May need to change certain keybindings
@@ -59,4 +70,11 @@
       - [ ] add evil inspired keybindings for window management
 - [x] init-workspace.el
 
+## Needed Modules - Scimax 
+- [ ] scimax-jinx.el
+- [ ] words.el
+- [ ] scimax-md.el
+- [ ] scimax-lob.el
 
+# Issue
+- [ ] **Important**: eval-when-compile error - probably due to a missing required module in *init.el*

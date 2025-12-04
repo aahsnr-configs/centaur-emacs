@@ -1,13 +1,13 @@
 - [ ] change default toggles-hydra/body keybinding
 - [ ] init-ai.el
-- [ ] init-base.el
+- [x] init-base.el
 - [ ] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
 - [ ] init-check.el
 - [ ] init-completion.el
 - [x] init-const.el
-- [ ] init-custom.el
+- [x] init-custom.el
 - [ ] init-dap.el
 - [ ] init-dashboard.el
 - [ ] init-dict.el
@@ -24,7 +24,7 @@
 - [x] init-funcs.el
 - [ ] init-go.el
 - [ ] init-highlight.el
-- [x] init-hydra.el
+- [ ] init-hydra.el
 - [ ] init-ibuffer.el
 - [ ] init-kill-ring.el
 - [ ] init-lsp.el
@@ -40,7 +40,7 @@
 - [ ] init-shell.el
 - [ ] init-snippet.el
 - [ ] init-treemacs.el
-- [x] init-ui.el
+- [ ] init-ui.el
 - [ ] init-utils.el
 - [ ] init-vcs.el
 - [ ] init-web.el

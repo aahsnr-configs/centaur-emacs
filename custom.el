@@ -8,6 +8,7 @@
 (setq centaur-full-name "Ahsanur Rahman")           ; User full name
 (setq centaur-mail-address "ahsanur041@proton.me")   ; Email address
 ;; (setq centaur-proxy "127.0.0.1:7897")          ; HTTP/HTTPS proxy
+(setq centaur-use-exec-path-from-shell t)
 ;; (setq centaur-socks-proxy "127.0.0.1:7897")    ; SOCKS proxy
 (setq centaur-server t)                      ; Enable `server-mode' or not: t or nil
 (setq centaur-icon t)                        ; Display icons or not: t or nil

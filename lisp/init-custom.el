@@ -135,7 +135,7 @@ If using emacs-plus with path ejection, set to nil."
                     centaur-package-archives-alist)))
 
 (defcustom centaur-theme-alist
-  '((default . doom-one)
+  '((default . doom-tokyo-night)
     (pro     . doom-monokai-pro)
     (dark    . doom-vibrant)
     (light   . doom-one-light)

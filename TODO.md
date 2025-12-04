@@ -1,19 +1,19 @@
 - [ ] change default toggles-hydra/body keybinding
 - [ ] init-ai.el
-- [x] init-base.el
+- [ ] init-base.el
 - [ ] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
 - [ ] init-check.el
 - [ ] init-completion.el
 - [x] init-const.el
-- [x] init-custom.el
+- [ ] init-custom.el
 - [ ] init-dap.el
 - [ ] init-dashboard.el
 - [ ] init-dict.el
 - [ ] init-dired.el
 - [ ] init-docker.el
-- [-] init-edit.el 
+- [-] init-edit.el
     - [ ] Use doom emacs like keybindings and general keybindings
     - [ ] Replace flyspell with jinx
     - [ ] Replace vundo with undo-fu-session and edit to evil to use it
@@ -46,4 +46,3 @@
 - [ ] init-web.el
 - [ ] init-window.el
 - [ ] init-workspace.el
-

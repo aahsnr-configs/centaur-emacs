@@ -4,7 +4,7 @@
 ;;;       Put your own configurations in custom-post.el to override default configurations.
 ;;; Code:
 
-(setq centaur-logo nil)                        ; Logo file or nil (official logo)
+;;(setq centaur-logo banner.txt)                        ; Logo file or nil (official logo)
 (setq centaur-full-name "Ahsanur Rahman")           ; User full name
 (setq centaur-mail-address "ahsanur041@proton.me")   ; Email address
 ;; (setq centaur-proxy "127.0.0.1:7897")          ; HTTP/HTTPS proxy
@@ -12,12 +12,13 @@
 (setq centaur-server t)                      ; Enable `server-mode' or not: t or nil
 (setq centaur-icon t)                        ; Display icons or not: t or nil
 (setq centaur-package-archives 'melpa)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
-(setq centaur-theme 'pro)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
+(setq centaur-theme 'default)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
 (setq centaur-completion-style 'minibuffer)    ; Completion display style: minibuffer or childframe
 ;; (setq centaur-frame-maximized-on-startup t)    ; Maximize frame on startup or not: t or nil
 (setq centaur-lsp 'lsp-mode)                   ; Set LSP client: lsp-mode, eglot or nil
 (setq centaur-lsp-format-on-save t)            ; Auto format buffers on save: t or nil
 (setq centaur-tree-sitter t)                 ; Enable tree-sitter or not: t or nil. Only available in 29+.
+(setq centaur-dashboard t)
 
 (setq centaur-prettify-symbols-alist t)
 
@@ -83,7 +84,7 @@
 
 ;; Misc.
 (setq confirm-kill-emacs 'y-or-n-p)
-(setq package-check-signature nil)
+;;(setq package-check-signature nil)
 
 ;; Enable proxy
 ;; (enable-http-proxy)

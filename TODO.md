@@ -39,7 +39,7 @@
 - [x] init-package.el
 - [ ] init-player.el
 - [ ] init-prog.el
-- [ ] init-python.el
+- [x] init-python.el
 - [x] init-reader.el
 - [ ] init-ruby.el
 - [ ] init-rust.el
@@ -58,3 +58,5 @@
       - [ ] integrate with flycheck instead of flymake
       - [ ] add evil inspired keybindings for window management
 - [x] init-workspace.el
+
+

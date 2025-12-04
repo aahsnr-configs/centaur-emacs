@@ -5,7 +5,8 @@
 - [ ] init-c.el
 - [ ] init-calendar.el
 - [ ] init-check.el
-- [ ] init-completion.el
+- [-] init-completion.el
+    - [ ] May need to change certain keybindings
 - [x] init-const.el
 - [x] init-custom.el
 - [ ] init-dap.el
@@ -24,7 +25,8 @@
 - [x] init-funcs.el
 - [ ] init-go.el
 - [ ] init-highlight.el
-- [ ] init-hydra.el
+- [-] init-hydra.el
+     - [ ] change the keybinding for toggles-body/hydra
 - [ ] init-ibuffer.el
 - [ ] init-kill-ring.el
 - [ ] init-lsp.el
@@ -38,9 +40,11 @@
 - [ ] init-ruby.el
 - [ ] init-rust.el
 - [ ] init-shell.el
-- [ ] init-snippet.el
+- [-] init-snippet.el
+     - [ ] do I need eglot integration using yasnippet-capf
 - [ ] init-treemacs.el
-- [ ] init-ui.el
+- [-] init-ui.el
+      - [ ] set doom like keybindings for default-text-scale
 - [ ] init-utils.el
 - [ ] init-vcs.el
 - [ ] init-web.el

@@ -118,7 +118,6 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-snippet)
 
 (require 'init-bookmark)
-(require 'init-calendar)
 (require 'init-dashboard)
 (require 'init-dired)
 (require 'init-highlight)
@@ -143,12 +142,7 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 
 (require 'init-prog)
 (require 'init-elisp)
-(require 'init-c)
-(require 'init-go)
-(require 'init-rust)
 (require 'init-python)
-(require 'init-ruby)
-(require 'init-elixir)
 (require 'init-web)
 (require 'init-evil)
 

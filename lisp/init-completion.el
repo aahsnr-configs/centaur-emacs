@@ -41,20 +41,12 @@
   (completion-category-overrides '((file (styles basic partial-completion))))
   (orderless-component-separator #'orderless-escapable-split-on-space))
 
-;; Support Pinyin
-(use-package pinyinlib
-  :after orderless
-  :functions orderless-regexp
-  :autoload pinyinlib-build-regexp-string
-  :init
-  (defun orderless-regexp-pinyin (str)
-    "Match COMPONENT as a pinyin regex."
-    (orderless-regexp (pinyinlib-build-regexp-string str)))
-  (add-to-list 'orderless-matching-styles 'orderless-regexp-pinyin))
-
 ;; VERTical Interactive COmpletion
 (use-package vertico
-  :custom (vertico-count 15)
+  :custom
+  (vertico-count 10)
+  (vertico-cycle t)
+  (vertico-resize nil)
   :bind (:map vertico-map
          ("RET" . vertico-directory-enter)
          ("DEL" . vertico-directory-delete-char)
@@ -62,19 +54,12 @@
   :hook ((after-init . vertico-mode)
          (rfn-eshadow-update-overlay . vertico-directory-tidy)))
 
-;; Display vertico in the child frame
-(use-package vertico-posframe
-  :functions posframe-poshandler-frame-center-near-bottom
-  :hook (vertico-mode . vertico-posframe-mode)
-  :init (setq vertico-posframe-poshandler
-              #'posframe-poshandler-frame-center-near-bottom
-              vertico-posframe-parameters
-              '((left-fringe  . 8)
-                (right-fringe . 8))))
-
 ;; Enrich existing commands with completion annotations
 (use-package marginalia
-  :hook (after-init . marginalia-mode))
+  :hook (after-init . marginalia-mode)
+  :config
+  (setq marginalia-max-relative-age 0
+        marginalia-align 'right))
 
 ;; Add icons to completion candidates
 (use-package nerd-icons-completion
@@ -88,70 +73,18 @@
   :autoload (consult--read consult--customize-put)
   :commands (consult-narrow-help)
   :functions (list-colors-duplicates consult-colors--web-list)
-  :bind (;; C-c bindings in `mode-specific-map'
-         ("C-c M-x" . consult-mode-command)
-         ("C-c h"   . consult-history)
-         ("C-c k"   . consult-kmacro)
-         ("C-c i"   . consult-info)
-         ("C-c r"   . consult-ripgrep)
-         ("C-c T"   . consult-theme)
-         ("C-."     . consult-imenu)
-
-         ("C-c c e" . consult-colors-emacs)
-         ("C-c c w" . consult-colors-web)
-         ("C-c c f" . describe-face)
-         ("C-c c l" . find-library)
-         ("C-c c t" . consult-theme)
-
-         ([remap Info-search]        . consult-info)
-         ([remap isearch-forward]    . consult-line)
-         ([remap recentf-open-files] . consult-recent-file)
-
-         ;; C-x bindings in `ctl-x-map'
-         ("C-x M-:" . consult-complex-command)     ;; orig. repeat-complex-command
-         ("C-x b"   . consult-buffer)              ;; orig. switch-to-buffer
-         ("C-x 4 b" . consult-buffer-other-window) ;; orig. switch-to-buffer-other-window
-         ("C-x 5 b" . consult-buffer-other-frame)  ;; orig. switch-to-buffer-other-frame
-         ("C-x r b" . consult-bookmark)            ;; orig. bookmark-jump
-         ("C-x p b" . consult-project-buffer)      ;; orig. project-switch-to-buffer
-         ;; Custom M-# bindings for fast register access
-         ("M-#"     . consult-register-load)
-         ("M-'"     . consult-register-store)      ;; orig. abbrev-prefix-mark (unrelated)
-         ("C-M-#"   . consult-register)
-         ;; Other custom bindings
-         ("M-y"     . consult-yank-pop)            ;; orig. yank-pop
-         ;; M-g bindings in `goto-map'
-         ("M-g e"   . consult-compile-error)
-         ("M-g f"   . consult-flymake)             ;; Alternative: consult-flycheck
-         ("M-g g"   . consult-goto-line)           ;; orig. goto-line
-         ("M-g M-g" . consult-goto-line)           ;; orig. goto-line
-         ("M-g o"   . consult-outline)             ;; Alternative: consult-org-heading
-         ("M-g m"   . consult-mark)
-         ("M-g k"   . consult-global-mark)
-         ("M-g i"   . consult-imenu)
-         ("M-g I"   . consult-imenu-multi)
-         ;; M-s bindings in `search-map'
-         ("M-s d"   . consult-find)
-         ("M-s D"   . consult-locate)
-         ("M-s g"   . consult-grep)
-         ("M-s G"   . consult-git-grep)
-         ("M-s r"   . consult-ripgrep)
-         ("M-s l"   . consult-line)
-         ("M-s L"   . consult-line-multi)
-         ("M-s k"   . consult-keep-lines)
-         ("M-s u"   . consult-focus-lines)
-         ;; Isearch integration
-         ("M-s e"   . consult-isearch-history)
-         :map isearch-mode-map
-         ("M-e"     . consult-isearch-history)      ;; orig. isearch-edit-string
-         ("M-s e"   . consult-isearch-history)      ;; orig. isearch-edit-string
-         ("M-s l"   . consult-line)                 ;; needed by consult-line to detect isearch
-         ("M-s L"   . consult-line-multi)           ;; needed by consult-line to detect isearch
-
-         ;; Minibuffer history
-         :map minibuffer-local-map
-         ("M-s" . consult-history)                  ;; orig. next-matching-history-element
-         ("M-r" . consult-history))                 ;; orig. previous-matching-history-element
+  :bind
+  ([remap switch-to-buffer] . consult-buffer)
+  ([remap switch-to-buffer-other-window] . consult-buffer-other-window)
+  ([remap switch-to-buffer-other-frame] . consult-buffer-other-frame)
+  ([remap bookmark-jump] . consult-bookmark)
+  ([remap evil-show-marks] . consult-mark)
+  ([remap evil-show-jumps] . consult-jump-list)
+  ([remap goto-line] . consult-goto-line)
+  ([remap imenu] . consult-imenu)
+  ([remap load-theme] . consult-theme)
+  ([remap recentf-open-files] . consult-recent-file)
+  ([remap yank-pop] . consult-yank-pop)
 
   ;; Enable automatic preview at point in the *Completions* buffer. This is
   ;; relevant when you use the default completion UI.
@@ -237,9 +170,6 @@ value of the selected COLOR."
   ;; Optionally make narrowing help available in the minibuffer.
   ;; You may want to use `embark-prefix-help-command' or which-key instead.
   (define-key consult-narrow-map (vconcat consult-narrow-key "?") #'consult-narrow-help))
-
-(use-package consult-flyspell
-  :bind ("M-g s" . consult-flyspell))
 
 (use-package consult-yasnippet
   :bind ("M-g y" . consult-yasnippet))
@@ -341,6 +271,7 @@ targets."
          (global-corfu-mode . corfu-popupinfo-mode)
          (global-corfu-mode . corfu-history-mode))
   :config
+  (corfu-history-mode)
   ;;Quit completion before saving
   (add-hook 'before-save-hook #'corfu-quit)
   (advice-add #'persistent-scratch-save :before #'corfu-quit)

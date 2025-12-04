@@ -101,6 +101,13 @@
         (doom-themes-enable-italic t)
         :init (centaur-load-theme centaur-theme t)
         :config
+        ;; Enable custom neotree theme (nerd-icons must be installed!)
+        (doom-themes-neotree-config)
+        ;; or for treemacs users
+        (doom-themes-treemacs-config)
+        ;; Corrects (and improves) org-mode's native fontification.
+        (doom-themes-org-config)
+
         ;; Enable flashing mode-line on errors
         (doom-themes-visual-bell-config)))
   (progn
@@ -280,14 +287,11 @@
 
 ;; Icons
 (use-package nerd-icons
-  :commands nerd-icons-install-fonts
-  :functions font-available-p
+  :custom
+  (nerd-icons-font-family "Symbols Nerd Font Mono")
+  (nerd-icons-color-icons t)
   :config
-  ;; Install nerd fonts automatically only in GUI
-  ;; For macOS, may install via "brew install font-symbols-only-nerd-font"
-  (when (and (display-graphic-p)
-             (not (font-available-p nerd-icons-font-family)))
-    (nerd-icons-install-fonts t)))
+  (setq inhibit-compacting-font-caches t))
 
 ;; Show line numbers
 (use-package display-line-numbers
@@ -316,19 +320,8 @@
 
 ;; Easily adjust the font size in all frames
 (use-package default-text-scale
-  :hook (after-init . default-text-scale-mode)
-  :bind (:map default-text-scale-mode-map
-         ("s-="   . default-text-scale-increase)
-         ("s--"   . default-text-scale-decrease)
-         ("s-0"   . default-text-scale-reset)
-         ("C-s-=" . default-text-scale-increase)
-         ("C-s--" . default-text-scale-decrease)
-         ("C-s-0" . default-text-scale-reset)))
+  :hook (after-init . default-text-scale-mode))
 
-;; Display time
-(use-package time
-  :init (setq display-time-default-load-average nil
-              display-time-format "%H:%M"))
 
 ;; Scrolling
 ;; Scroll one line at a time (less "jumpy" than defaults)

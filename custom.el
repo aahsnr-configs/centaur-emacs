@@ -10,31 +10,23 @@
 ;; (setq centaur-proxy "127.0.0.1:7897")          ; HTTP/HTTPS proxy
 ;; (setq centaur-socks-proxy "127.0.0.1:7897")    ; SOCKS proxy
 (setq centaur-server t)                      ; Enable `server-mode' or not: t or nil
-;; (setq centaur-use-exec-path-from-shell nil)    ; Use `exec-path-from-shell' or not. If using emacs-plus with path ejection, set to nil
-;;(setq centaur-icon t)                        ; Display icons or not: t or nil
-(setq centaur-package-archives 'ustc)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
+(setq centaur-icon t)                        ; Display icons or not: t or nil
+(setq centaur-package-archives 'melpa)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
 (setq centaur-theme 'pro)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
 (setq centaur-completion-style 'minibuffer)    ; Completion display style: minibuffer or childframe
 ;; (setq centaur-frame-maximized-on-startup t)    ; Maximize frame on startup or not: t or nil
 (setq centaur-lsp 'lsp-mode)                   ; Set LSP client: lsp-mode, eglot or nil
 (setq centaur-lsp-format-on-save t)            ; Auto format buffers on save: t or nil
-;; (setq centaur-lsp-format-on-save-ignore-modes '(c-mode c++-mode python-mode markdown-mode)) ; Ignore format on save for some languages
 (setq centaur-tree-sitter t)                 ; Enable tree-sitter or not: t or nil. Only available in 29+.
-;; (setq centaur-chinese-calendar t)              ; Support Chinese calendar or not: t or nil
-;; (setq centaur-player t)                        ; Enable players or not: t or nil
-(setq centaur-prettify-symbols-alist t)      ; Alist of symbol prettifications. Nil to use font supports ligatures.
 
-;; For Emacs devel
-;; (setq package-user-dir (locate-user-emacs-file (format "elpa-%s" emacs-major-version)))
-;; (setq desktop-base-file-name (format ".emacs-%s.desktop" emacs-major-version))
-;; (setq desktop-base-lock-name (format ".emacs-%s.desktop.lock" emacs-major-version))
+(setq centaur-prettify-symbols-alist t)
 
 ;; Fonts
 (defun centaur-setup-fonts ()
   "Setup fonts."
   (when (display-graphic-p)
     ;; Set default font
-    (cl-loop for font in '("JetbrainsMono Nerd Font")
+    (cl-loop for font in '("Jetbrains Mono")
              when (font-available-p font)
              return (set-face-attribute 'default nil
                                         :family font

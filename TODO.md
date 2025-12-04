@@ -1,0 +1,49 @@
+- [ ] change default toggles-hydra/body keybinding
+- [ ] init-ai.el
+- [x] init-base.el
+- [ ] init-bookmark.el
+- [ ] init-c.el
+- [ ] init-calendar.el
+- [ ] init-check.el
+- [ ] init-completion.el
+- [x] init-const.el
+- [x] init-custom.el
+- [ ] init-dap.el
+- [ ] init-dashboard.el
+- [ ] init-dict.el
+- [ ] init-dired.el
+- [ ] init-docker.el
+- [-] init-edit.el 
+    - [ ] Use doom emacs like keybindings and general keybindings
+    - [ ] Replace flyspell with jinx
+    - [ ] Replace vundo with undo-fu-session and edit to evil to use it
+- [ ] init-elisp.el
+- [ ] init-elixir.el
+- [ ] init-eshell.el
+- [ ] init-evil.el
+- [x] init-funcs.el
+- [ ] init-go.el
+- [ ] init-highlight.el
+- [x] init-hydra.el
+- [ ] init-ibuffer.el
+- [ ] init-kill-ring.el
+- [ ] init-lsp.el
+- [ ] init-markdown.el
+- [ ] init-org.el
+- [x] init-package.el
+- [ ] init-player.el
+- [ ] init-prog.el
+- [ ] init-python.el
+- [ ] init-reader.el
+- [ ] init-ruby.el
+- [ ] init-rust.el
+- [ ] init-shell.el
+- [ ] init-snippet.el
+- [ ] init-treemacs.el
+- [x] init-ui.el
+- [ ] init-utils.el
+- [ ] init-vcs.el
+- [ ] init-web.el
+- [ ] init-window.el
+- [ ] init-workspace.el
+

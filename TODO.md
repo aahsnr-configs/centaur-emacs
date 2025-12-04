@@ -1,7 +1,7 @@
 - [ ] change default toggles-hydra/body keybinding
 - [ ] init-ai.el
 - [x] init-base.el
-- [ ] init-bookmark.el
+- [x] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
 - [ ] init-check.el
@@ -10,9 +10,9 @@
 - [x] init-const.el
 - [x] init-custom.el
 - [ ] init-dap.el
-- [ ] init-dashboard.el
+- [x] init-dashboard.el
 - [ ] init-dict.el
-- [ ] init-dired.el
+- [x] init-dired.el
 - [ ] init-docker.el
 - [-] init-edit.el
     - [ ] Use doom emacs like keybindings and general keybindings
@@ -24,7 +24,7 @@
 - [ ] init-evil.el
 - [x] init-funcs.el
 - [ ] init-go.el
-- [ ] init-highlight.el
+- [x] init-highlight.el
 - [-] init-hydra.el
      - [ ] change the keybinding for toggles-body/hydra
 - [ ] init-ibuffer.el

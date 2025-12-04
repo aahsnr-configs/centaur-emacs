@@ -168,83 +168,11 @@
   :init (setq rg-show-columns t)
   :config (add-to-list 'rg-custom-type-aliases '("tmpl" . "*.tmpl")))
 
-;; A Simple and cool pomodoro timer
-(use-package pomidor
-  :bind ("s-<f12>" . pomidor)
-  :init
-  (setq alert-default-style 'mode-line)
-
-  (when sys/macp
-    (setq pomidor-play-sound-file
-          (lambda (file)
-            (when (executable-find "afplay")
-              (start-process "pomidor-play-sound" nil "afplay" file))))))
-
 ;; Nice writing
 (use-package olivetti
   :diminish
   :bind ("<f7>" . olivetti-mode)
   :init (setq olivetti-body-width 0.62))
-
-;; Edit text for browsers with GhostText or AtomicChrome extension
-(use-package atomic-chrome
-  :hook ((emacs-startup . atomic-chrome-start-server)
-         (atomic-chrome-edit-mode . delete-other-windows))
-  :init (setq atomic-chrome-buffer-frame-width 100
-              atomic-chrome-buffer-frame-height 30
-              atomic-chrome-buffer-open-style 'frame)
-  :config
-  (when (fboundp 'gfm-mode)
-    (setq atomic-chrome-url-major-mode-alist
-          '(("github\\.com" . gfm-mode)
-            ("gitlab\\.*"   . gfm-mode)))))
-
-;; Process
-(use-package proced
-  :ensure nil
-  :init
-  (setq-default proced-format 'verbose)
-  (setq proced-auto-update-flag t
-        proced-auto-update-interval 3
-        proced-enable-color-flag t))
-
-;; Search
-(use-package webjump
-  :ensure nil
-  :bind ("C-c /" . webjump)
-  :init (setq webjump-sites
-              '(;; Emacs
-                ("Emacs Home Page" .
-                 "www.gnu.org/software/emacs/emacs.html")
-                ("Xah Emacs Site" . "ergoemacs.org/index.html")
-                ("(or emacs irrelevant)" . "oremacs.com")
-                ("Mastering Emacs" .
-                 "https://www.masteringemacs.org/")
-
-                ;; Search engines.
-                ("DuckDuckGo" .
-                 [simple-query "duckduckgo.com"
-                               "duckduckgo.com/?q=" ""])
-                ("Google" .
-                 [simple-query "www.google.com"
-                               "www.google.com/search?q=" ""])
-                ("Bing" .
-                 [simple-query "www.bing.com"
-                               "www.bing.com/search?q=" ""])
-
-                ("Baidu" .
-                 [simple-query "www.baidu.com"
-                               "www.baidu.com/s?wd=" ""])
-                ("Wikipedia" .
-                 [simple-query "wikipedia.org" "wikipedia.org/wiki/" ""]))))
-
-;; IRC
-(use-package erc
-  :ensure nil
-  :defines erc-interpret-mirc-color erc-autojoin-channels-alist
-  :init (setq erc-interpret-mirc-color t
-              erc-lurker-hide-list '("JOIN" "PART" "QUIT")
-              erc-autojoin-channels-alist '(("freenode.net" "#emacs"))))
 
 ;; text mode directory tree
 (use-package ztree
@@ -323,8 +251,9 @@
           ("C-o" . casual-agenda-tmenu))))))
 
 ;; Misc
-(use-package disk-usage)
-(use-package memory-usage)
+(use-package envrc
+  :hook (after-init . envrc-global-mode))
+
 (use-package reveal-in-folder)
 
 (use-package list-environment
@@ -341,6 +270,8 @@
                              `(,val face font-lock-string-face)))))
               process-environment))
     (advice-add #'list-environment-entries :override #'my-list-environment-entries)))
+
+
 
 (provide 'init-utils)
 

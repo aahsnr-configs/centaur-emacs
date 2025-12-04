@@ -30,30 +30,23 @@
 
 ;;; Code:
 
-(use-package flymake
-  :diminish
-  :functions my-elisp-flymake-byte-compile
-  :bind ("C-c f" . flymake-show-buffer-diagnostics)
-  :hook (prog-mode . flymake-mode)
-  :init (setq flymake-no-changes-timeout nil
-              flymake-fringe-indicator-position 'right-fringe
-              flymake-margin-indicator-position 'right-margin)
-  :config
-  ;; Check elisp with `load-path'
-  (defun my-elisp-flymake-byte-compile (fn &rest args)
-    "Wrapper for `elisp-flymake-byte-compile'."
-    (let ((elisp-flymake-byte-compile-load-path
-           (append elisp-flymake-byte-compile-load-path load-path)))
-      (apply fn args)))
-  (advice-add 'elisp-flymake-byte-compile :around #'my-elisp-flymake-byte-compile))
-
-(use-package flymake-popon
-  :diminish
+(use-package flycheck
+  :hook (prog-mode . flycheck-mode)
+  :custom
+  (flycheck-check-syntax-automatically '(save mode-enabled))
+  (flycheck-idle-change-delay 0.2)
   :custom-face
-  (flymake-popon ((t :inherit default :height 0.85)))
-  (flymake-popon-posframe-border ((t :foreground ,(face-background 'posframe-border nil t))))
-  :hook (flymake-mode . flymake-popon-mode)
-  :init (setq flymake-popon-width 80))
+  (flycheck-error   ((t (:underline (:style wave :color "#f7768e") :inherit nil))))
+  (flycheck-warning ((t (:underline (:style wave :color "#e0af68") :inherit nil))))
+  (flycheck-info    ((t (:underline (:style wave :color "#73daca") :inherit nil)))))
+
+(use-package sideline
+  :hook (flycheck-mode . sideline-mode)
+  :init
+  (setq sideline-backends-right '(sideline-flycheck)))
+
+(use-package sideline-flycheck
+  :hook (flycheck-mode . sideline-flycheck-setup))
 
 (provide 'init-check)
 

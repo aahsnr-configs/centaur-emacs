@@ -4,7 +4,8 @@
 - [x] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
-- [ ] init-check.el
+- [x] init-check.el
+    - [ ] replace flymake with flycheck
 - [-] init-completion.el
     - [ ] May need to change certain keybindings
 - [x] init-const.el
@@ -18,7 +19,7 @@
     - [ ] Use doom emacs like keybindings and general keybindings
     - [ ] Replace flyspell with jinx
     - [ ] Replace vundo with undo-fu-session and edit to evil to use it
-- [ ] init-elisp.el
+- [x] init-elisp.el
 - [ ] init-elixir.el
 - [ ] init-eshell.el
 - [ ] init-evil.el
@@ -33,12 +34,13 @@
 - [ ] init-lsp.el
      - [ ] make sure it does not conflict with scimax
 - [x] init-markdown.el
-- [ ] init-org.el
+- [-] init-org.el
+     - [ ] need to make a lot of changes suited to my needs
 - [x] init-package.el
 - [ ] init-player.el
 - [ ] init-prog.el
 - [ ] init-python.el
-- [ ] init-reader.el
+- [x] init-reader.el
 - [ ] init-ruby.el
 - [ ] init-rust.el
 - [ ] init-shell.el
@@ -49,8 +51,8 @@
      - [ ] fix weird fonts in treemacs side window
 - [-] init-ui.el
       - [ ] set doom like keybindings for default-text-scale
-- [ ] init-utils.el
-- [ ] init-vcs.el
+- [x] init-utils.el
+- [x] init-vcs.el
 - [ ] init-web.el
 - [-] init-window.el
       - [ ] integrate with flycheck instead of flymake

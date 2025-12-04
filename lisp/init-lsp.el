@@ -83,6 +83,10 @@
      :init (setq lsp-use-plists t
                  lsp-log-io nil
 
+                 ;; my additions
+                 lsp-diagnostics-provider :flycheck
+                 lsp-completion-provider :none
+
                  lsp-keymap-prefix "C-c l"
                  lsp-keep-workspace-alive nil
                  lsp-signature-auto-activate nil
@@ -122,49 +126,49 @@
        (defun my-lsp-bash-check-sh-shell (&rest _)
          (and (memq major-mode '(sh-mode bash-ts-mode))
               (memq sh-shell '(sh bash zsh))))
-       (advice-add #'lsp-bash-check-sh-shell :override #'my-lsp-bash-check-sh-shell)
-       (add-to-list 'lsp-language-id-configuration '(bash-ts-mode . "shellscript"))
+                                     (advice-add #'lsp-bash-check-sh-shell :override #'my-lsp-bash-check-sh-shell)
+                                     (add-to-list 'lsp-language-id-configuration '(bash-ts-mode . "shellscript"))
 
-       ;; Display icons
-       (when (icons-displayable-p)
-         (defun my-lsp-icons-get-by-file-ext (file-ext &optional feature)
-           (when (and file-ext
-                      (lsp-icons--enabled-for-feature feature))
-             (nerd-icons-icon-for-extension file-ext)))
-         (advice-add #'lsp-icons-get-by-file-ext :override #'my-lsp-icons-get-by-file-ext)
+                                     ;; Display icons
+                                     (when (icons-displayable-p)
+       (defun my-lsp-icons-get-by-file-ext (file-ext &optional feature)
+         (when (and file-ext
+                    (lsp-icons--enabled-for-feature feature))
+           (nerd-icons-icon-for-extension file-ext)))
+       (advice-add #'lsp-icons-get-by-file-ext :override #'my-lsp-icons-get-by-file-ext)
 
-         (defvar lsp-symbol-alist
-           '((misc          nerd-icons-codicon "nf-cod-symbol_namespace" :face font-lock-warning-face)
-             (document      nerd-icons-codicon "nf-cod-symbol_file" :face font-lock-string-face)
-             (namespace     nerd-icons-codicon "nf-cod-symbol_namespace" :face font-lock-type-face)
-             (string        nerd-icons-codicon "nf-cod-symbol_string" :face font-lock-doc-face)
-             (boolean-data  nerd-icons-codicon "nf-cod-symbol_boolean" :face font-lock-builtin-face)
-             (numeric       nerd-icons-codicon "nf-cod-symbol_numeric" :face font-lock-builtin-face)
-             (method        nerd-icons-codicon "nf-cod-symbol_method" :face font-lock-function-name-face)
-             (field         nerd-icons-codicon "nf-cod-symbol_field" :face font-lock-variable-name-face)
-             (localvariable nerd-icons-codicon "nf-cod-symbol_variable" :face font-lock-variable-name-face)
-             (class         nerd-icons-codicon "nf-cod-symbol_class" :face font-lock-type-face)
-             (interface     nerd-icons-codicon "nf-cod-symbol_interface" :face font-lock-type-face)
-             (property      nerd-icons-codicon "nf-cod-symbol_property" :face font-lock-variable-name-face)
-             (indexer       nerd-icons-codicon "nf-cod-symbol_enum" :face font-lock-builtin-face)
-             (enumerator    nerd-icons-codicon "nf-cod-symbol_enum" :face font-lock-builtin-face)
-             (enumitem      nerd-icons-codicon "nf-cod-symbol_enum_member" :face font-lock-builtin-face)
-             (constant      nerd-icons-codicon "nf-cod-symbol_constant" :face font-lock-constant-face)
-             (structure     nerd-icons-codicon "nf-cod-symbol_structure" :face font-lock-variable-name-face)
-             (event         nerd-icons-codicon "nf-cod-symbol_event" :face font-lock-warning-face)
-             (operator      nerd-icons-codicon "nf-cod-symbol_operator" :face font-lock-comment-delimiter-face)
-             (template      nerd-icons-codicon "nf-cod-symbol_snippet" :face font-lock-type-face)))
+       (defvar lsp-symbol-alist
+         '((misc          nerd-icons-codicon "nf-cod-symbol_namespace" :face font-lock-warning-face)
+           (document      nerd-icons-codicon "nf-cod-symbol_file" :face font-lock-string-face)
+           (namespace     nerd-icons-codicon "nf-cod-symbol_namespace" :face font-lock-type-face)
+           (string        nerd-icons-codicon "nf-cod-symbol_string" :face font-lock-doc-face)
+           (boolean-data  nerd-icons-codicon "nf-cod-symbol_boolean" :face font-lock-builtin-face)
+           (numeric       nerd-icons-codicon "nf-cod-symbol_numeric" :face font-lock-builtin-face)
+           (method        nerd-icons-codicon "nf-cod-symbol_method" :face font-lock-function-name-face)
+           (field         nerd-icons-codicon "nf-cod-symbol_field" :face font-lock-variable-name-face)
+           (localvariable nerd-icons-codicon "nf-cod-symbol_variable" :face font-lock-variable-name-face)
+           (class         nerd-icons-codicon "nf-cod-symbol_class" :face font-lock-type-face)
+           (interface     nerd-icons-codicon "nf-cod-symbol_interface" :face font-lock-type-face)
+           (property      nerd-icons-codicon "nf-cod-symbol_property" :face font-lock-variable-name-face)
+           (indexer       nerd-icons-codicon "nf-cod-symbol_enum" :face font-lock-builtin-face)
+           (enumerator    nerd-icons-codicon "nf-cod-symbol_enum" :face font-lock-builtin-face)
+           (enumitem      nerd-icons-codicon "nf-cod-symbol_enum_member" :face font-lock-builtin-face)
+           (constant      nerd-icons-codicon "nf-cod-symbol_constant" :face font-lock-constant-face)
+           (structure     nerd-icons-codicon "nf-cod-symbol_structure" :face font-lock-variable-name-face)
+           (event         nerd-icons-codicon "nf-cod-symbol_event" :face font-lock-warning-face)
+           (operator      nerd-icons-codicon "nf-cod-symbol_operator" :face font-lock-comment-delimiter-face)
+           (template      nerd-icons-codicon "nf-cod-symbol_snippet" :face font-lock-type-face)))
 
-         (defun my-lsp-icons-get-by-symbol-kind (kind &optional feature)
-           (when (and kind
-                      (lsp-icons--enabled-for-feature feature))
-             (let* ((icon (cdr (assoc (lsp-treemacs-symbol-kind->icon kind) lsp-symbol-alist)))
-                    (args (cdr icon)))
-               (apply (car icon) args))))
-         (advice-add #'lsp-icons-get-by-symbol-kind :override #'my-lsp-icons-get-by-symbol-kind)
+       (defun my-lsp-icons-get-by-symbol-kind (kind &optional feature)
+         (when (and kind
+                    (lsp-icons--enabled-for-feature feature))
+           (let* ((icon (cdr (assoc (lsp-treemacs-symbol-kind->icon kind) lsp-symbol-alist)))
+                                  (args (cdr icon)))
+             (apply (car icon) args))))
+       (advice-add #'lsp-icons-get-by-symbol-kind :override #'my-lsp-icons-get-by-symbol-kind)
 
-         (setq lsp-headerline-arrow (nerd-icons-octicon "nf-oct-chevron_right"
-                                                        :face 'lsp-headerline-breadcrumb-separator-face)))))
+       (setq lsp-headerline-arrow (nerd-icons-octicon "nf-oct-chevron_right"
+                                                                      :face 'lsp-headerline-breadcrumb-separator-face)))))
 
    (use-package lsp-ui
      :custom-face
@@ -172,54 +176,54 @@
      :pretty-hydra
      ((:title (pretty-hydra-title "LSP UI" 'faicon "nf-fa-rocket" :face 'nerd-icons-green)
        :color amaranth :quit-key ("q" "C-g"))
-      ("Doc"
-       (("d e" (progn
-                 (lsp-ui-doc-enable (not lsp-ui-doc-mode))
-                 (setq lsp-ui-doc-enable (not lsp-ui-doc-enable)))
-         "enable" :toggle lsp-ui-doc-mode)
-        ("d s" (setq lsp-ui-doc-include-signature (not lsp-ui-doc-include-signature))
-         "signature" :toggle lsp-ui-doc-include-signature)
-        ("d t" (setq lsp-ui-doc-position 'top)
-         "top" :toggle (eq lsp-ui-doc-position 'top))
-        ("d b" (setq lsp-ui-doc-position 'bottom)
-         "bottom" :toggle (eq lsp-ui-doc-position 'bottom))
-        ("d p" (setq lsp-ui-doc-position 'at-point)
-         "at point" :toggle (eq lsp-ui-doc-position 'at-point))
-        ("d h" (setq lsp-ui-doc-header (not lsp-ui-doc-header))
-         "header" :toggle lsp-ui-doc-header)
-        ("d f" (setq lsp-ui-doc-alignment 'frame)
-         "align frame" :toggle (eq lsp-ui-doc-alignment 'frame))
-        ("d w" (setq lsp-ui-doc-alignment 'window)
-         "align window" :toggle (eq lsp-ui-doc-alignment 'window)))
-       "Sideline"
-       (("s e" (progn
-                 (lsp-ui-sideline-enable (not lsp-ui-sideline-mode))
-                 (setq lsp-ui-sideline-enable (not lsp-ui-sideline-enable)))
-         "enable" :toggle lsp-ui-sideline-mode)
-        ("s h" (setq lsp-ui-sideline-show-hover (not lsp-ui-sideline-show-hover))
-         "hover" :toggle lsp-ui-sideline-show-hover)
-        ("s d" (setq lsp-ui-sideline-show-diagnostics (not lsp-ui-sideline-show-diagnostics))
-         "diagnostics" :toggle lsp-ui-sideline-show-diagnostics)
-        ("s s" (setq lsp-ui-sideline-show-symbol (not lsp-ui-sideline-show-symbol))
-         "symbol" :toggle lsp-ui-sideline-show-symbol)
-        ("s c" (setq lsp-ui-sideline-show-code-actions (not lsp-ui-sideline-show-code-actions))
-         "code actions" :toggle lsp-ui-sideline-show-code-actions)
-        ("s i" (setq lsp-ui-sideline-ignore-duplicate (not lsp-ui-sideline-ignore-duplicate))
-         "ignore duplicate" :toggle lsp-ui-sideline-ignore-duplicate))
-       "Action"
-       (("h" backward-char "←")
-        ("j" next-line "↓")
-        ("k" previous-line "↑")
-        ("l" forward-char "→")
-        ("C-a" mwim-beginning-of-code-or-line nil)
-        ("C-e" mwim-end-of-code-or-line nil)
-        ("C-b" backward-char nil)
-        ("C-n" next-line nil)
-        ("C-p" previous-line nil)
-        ("C-f" forward-char nil)
-        ("M-b" backward-word nil)
-        ("M-f" forward-word nil)
-        ("c" lsp-ui-sideline-apply-code-actions "apply code actions"))))
+                     ("Doc"
+      (("d e" (progn
+                (lsp-ui-doc-enable (not lsp-ui-doc-mode))
+                (setq lsp-ui-doc-enable (not lsp-ui-doc-enable)))
+        "enable" :toggle lsp-ui-doc-mode)
+       ("d s" (setq lsp-ui-doc-include-signature (not lsp-ui-doc-include-signature))
+        "signature" :toggle lsp-ui-doc-include-signature)
+       ("d t" (setq lsp-ui-doc-position 'top)
+        "top" :toggle (eq lsp-ui-doc-position 'top))
+       ("d b" (setq lsp-ui-doc-position 'bottom)
+        "bottom" :toggle (eq lsp-ui-doc-position 'bottom))
+       ("d p" (setq lsp-ui-doc-position 'at-point)
+        "at point" :toggle (eq lsp-ui-doc-position 'at-point))
+       ("d h" (setq lsp-ui-doc-header (not lsp-ui-doc-header))
+        "header" :toggle lsp-ui-doc-header)
+       ("d f" (setq lsp-ui-doc-alignment 'frame)
+        "align frame" :toggle (eq lsp-ui-doc-alignment 'frame))
+       ("d w" (setq lsp-ui-doc-alignment 'window)
+        "align window" :toggle (eq lsp-ui-doc-alignment 'window)))
+      "Sideline"
+      (("s e" (progn
+                (lsp-ui-sideline-enable (not lsp-ui-sideline-mode))
+                (setq lsp-ui-sideline-enable (not lsp-ui-sideline-enable)))
+        "enable" :toggle lsp-ui-sideline-mode)
+       ("s h" (setq lsp-ui-sideline-show-hover (not lsp-ui-sideline-show-hover))
+        "hover" :toggle lsp-ui-sideline-show-hover)
+       ("s d" (setq lsp-ui-sideline-show-diagnostics (not lsp-ui-sideline-show-diagnostics))
+        "diagnostics" :toggle lsp-ui-sideline-show-diagnostics)
+       ("s s" (setq lsp-ui-sideline-show-symbol (not lsp-ui-sideline-show-symbol))
+        "symbol" :toggle lsp-ui-sideline-show-symbol)
+       ("s c" (setq lsp-ui-sideline-show-code-actions (not lsp-ui-sideline-show-code-actions))
+        "code actions" :toggle lsp-ui-sideline-show-code-actions)
+       ("s i" (setq lsp-ui-sideline-ignore-duplicate (not lsp-ui-sideline-ignore-duplicate))
+        "ignore duplicate" :toggle lsp-ui-sideline-ignore-duplicate))
+      "Action"
+      (("h" backward-char "←")
+       ("j" next-line "↓")
+       ("k" previous-line "↑")
+       ("l" forward-char "→")
+       ("C-a" mwim-beginning-of-code-or-line nil)
+       ("C-e" mwim-end-of-code-or-line nil)
+       ("C-b" backward-char nil)
+       ("C-n" next-line nil)
+       ("C-p" previous-line nil)
+       ("C-f" forward-char nil)
+       ("M-b" backward-word nil)
+       ("M-f" forward-word nil)
+       ("c" lsp-ui-sideline-apply-code-actions "apply code actions"))))
      :bind (("C-c u" . lsp-ui-imenu)
             :map lsp-ui-mode-map
             ("M-<f6>" . lsp-ui-hydra/body)

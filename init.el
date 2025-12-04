@@ -128,9 +128,6 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-window)
 (require 'init-treemacs)
 
-(require 'init-eshell)
-(require 'init-shell)
-
 (require 'init-markdown)
 (require 'init-org)
 (require 'init-reader)

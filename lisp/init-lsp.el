@@ -501,27 +501,6 @@
        (when (and (executable-find "yapf") buffer-file-name)
          (call-process "yapf" nil nil nil "-i" buffer-file-name))))
 
-   ;; C/C++/Objective-C
-   (use-package ccls
-     :hook ((c-mode c++-mode objc-mode cuda-mode) . (lambda () (require 'ccls)))
-     :config
-     (with-no-warnings
-       ;; FIXME: fail to call ccls.xref
-       ;; @see https://github.com/emacs-lsp/emacs-ccls/issues/109
-       (cl-defmethod my-lsp-execute-command
-         ((_server (eql ccls)) (command (eql ccls.xref)) arguments)
-         (when-let* ((xrefs (lsp--locations-to-xref-items
-                             (lsp--send-execute-command (symbol-name command) arguments))))
-           (xref--show-xrefs xrefs nil)))
-       (advice-add #'lsp-execute-command :override #'my-lsp-execute-command)))
-
-   ;; Swift
-   (use-package lsp-sourcekit)
-
-   ;; Julia
-   (use-package lsp-julia
-     :hook (julia-mode . (lambda () (require 'lsp-julia))))
-
    ;; Java
    (use-package lsp-java
      :hook ((java-mode java-ts-mode jdee-mode) . (lambda () (require 'lsp-java))))))

@@ -27,8 +27,9 @@
 - [x] init-highlight.el
 - [-] init-hydra.el
      - [ ] change the keybinding for toggles-body/hydra
-- [ ] init-ibuffer.el
-- [ ] init-kill-ring.el
+- [-] init-ibuffer.el
+     - [ ] change keybinding for launching ibuffer
+- [-] init-kill-ring.el
 - [ ] init-lsp.el
 - [ ] init-markdown.el
 - [ ] init-org.el

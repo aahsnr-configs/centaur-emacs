@@ -4,23 +4,19 @@
 ;;;       Put your own configurations in custom-post.el to override default configurations.
 ;;; Code:
 
-;;(setq centaur-logo banner.txt)                        ; Logo file or nil (official logo)
-(setq centaur-full-name "Ahsanur Rahman")           ; User full name
-(setq centaur-mail-address "ahsanur041@proton.me")   ; Email address
-;; (setq centaur-proxy "127.0.0.1:7897")          ; HTTP/HTTPS proxy
+(setq centaur-full-name "Ahsanur Rahman")
+(setq centaur-mail-address "ahsanur041@proton.me")
 (setq centaur-use-exec-path-from-shell t)
-;; (setq centaur-socks-proxy "127.0.0.1:7897")    ; SOCKS proxy
-(setq centaur-server t)                      ; Enable `server-mode' or not: t or nil
-(setq centaur-icon t)                        ; Display icons or not: t or nil
-(setq centaur-package-archives 'melpa)         ; Package repo: melpa, bfsu, iscas, netease, sjtu, tencent, tuna or ustc
-(setq centaur-theme 'default)                     ; Color theme: auto, random, system, default, pro, dark, light, warm, cold, day or night
-(setq centaur-completion-style 'minibuffer)    ; Completion display style: minibuffer or childframe
-;; (setq centaur-frame-maximized-on-startup t)    ; Maximize frame on startup or not: t or nil
-(setq centaur-lsp 'lsp-mode)                   ; Set LSP client: lsp-mode, eglot or nil
-(setq centaur-lsp-format-on-save t)            ; Auto format buffers on save: t or nil
-(setq centaur-tree-sitter t)                 ; Enable tree-sitter or not: t or nil. Only available in 29+.
+(setq centaur-server t)
+(setq centaur-icon t)
+(setq centaur-package-archives 'melpa)
+(setq centaur-theme 'default)
+(setq centaur-completion-style 'minibuffer)
+(setq centaur-frame-maximized-on-startup t)
+(setq centaur-lsp 'lsp-mode)
+(setq centaur-lsp-format-on-save t)
+(setq centaur-tree-sitter t)
 (setq centaur-dashboard t)
-
 (setq centaur-prettify-symbols-alist t)
 
 ;; Fonts
@@ -34,7 +30,7 @@
                                         :family font
                                         :height (cond (sys/macp 130)
                                                       (sys/win32p 110)
-                                                      (t 125))))
+                                                      (t 130))))
 
     ;; Set mode-line font
     ;; (cl-loop for font in '("SF Mono" "Menlo" "SF Pro Display" "Helvetica")
@@ -45,23 +41,11 @@
     ;;                     (set-face-attribute 'mode-line-active nil :family font :height 120))
     ;;                   (set-face-attribute 'mode-line-inactive nil :family font :height 120)))
 
-    ;; Specify font for all unicode characters
-    (cl-loop for font in '("Apple Symbols" "Segoe UI Symbol" "Symbola" "Symbol")
-             when (font-available-p font)
-             return (set-fontset-font t 'symbol (font-spec :family font) nil 'prepend))
-
-    ;; Emoji
-    (cl-loop for font in '("Noto Color Emoji" "Apple Color Emoji" "Segoe UI Emoji")
+    ;; ;; Emoji
+    (cl-loop for font in '("Noto Color Emoji")
              when (font-available-p font)
              return (set-fontset-font t 'emoji (font-spec :family font) nil 'prepend))
 
-    ;; Specify font for Chinese characters
-    ;; (cl-loop for font in '("LXGW Neo Xihei" "LXGW WenKai Mono" "WenQuanYi Micro Hei Mono"
-    ;;                        "PingFang SC" "Microsoft Yahei UI" "Simhei")
-    ;;          when (font-available-p font)
-    ;;          return (progn
-    ;;                   (setq face-font-rescale-alist `((,font . 1.3)))
-    ;;                   (set-fontset-font t 'han (font-spec :family font))))
     ))
 
 (centaur-setup-fonts)

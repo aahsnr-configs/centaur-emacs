@@ -35,18 +35,11 @@
   :custom
   (flycheck-check-syntax-automatically '(save mode-enabled))
   (flycheck-idle-change-delay 0.2)
+  (flycheck-emacs-lisp-load-path 'inherit)
   :custom-face
   (flycheck-error   ((t (:underline (:style wave :color "#f7768e") :inherit nil))))
   (flycheck-warning ((t (:underline (:style wave :color "#e0af68") :inherit nil))))
   (flycheck-info    ((t (:underline (:style wave :color "#73daca") :inherit nil)))))
-
-(use-package sideline
-  :hook (flycheck-mode . sideline-mode)
-  :init
-  (setq sideline-backends-right '(sideline-flycheck)))
-
-(use-package sideline-flycheck
-  :hook (flycheck-mode . sideline-flycheck-setup))
 
 (provide 'init-check)
 

@@ -34,44 +34,57 @@
   (require 'init-const))
 
 (when emacs/>=29p
-  (use-package dape
-    :bind (("<f5>" . dape)
-           ("M-<f5>" . dape-hydra/body))
-    :custom (dape-buffer-window-arrangment 'right)
+  (use-package dap-mode
+    :bind (("<f5>" . dap-debug)
+           ("M-<f5>" . dap-hydra/body))
+    :custom
+    ;; Enable only the features you want
+    (dap-auto-configure-features '(sessions locals controls tooltip))
     :pretty-hydra
     ((:title (pretty-hydra-title "Debug" 'codicon "nf-cod-debug")
       :color pink :quit-key ("q" "C-g"))
      ("Stepping"
-      (("n" dape-next "next")
-       ("s" dape-step-in "step in")
-       ("o" dape-step-out "step out")
-       ("c" dape-continue "continue")
-       ("p" dape-pause "pause")
-       ("k" dape-kill "kill")
-       ("r" dape-restart "restart")
-       ("D" dape-disconnect-quit "disconnect"))
+      (("n" dap-next "next")
+       ("s" dap-step-in "step in")
+       ("o" dap-step-out "step out")
+       ("c" dap-continue "continue")
+       ("k" dap-disconnect "disconnect")
+       ("r" dap-debug-restart "restart")
+       ("D" dap-delete-session "delete session"))
       "Switch"
-      (("m" dape-read-memory "memory")
-       ("t" dape-select-thread "thread")
-       ("w" dape-watch-dwim "watch")
-       ("S" dape-select-stack "stack")
-       ("i" dape-info "info")
-       ("R" dape-repl "repl"))
+      (("t" dap-switch-thread "thread")
+       ("w" dap-ui-expressions-add "watch")
+       ("S" dap-ui-sessions "sessions")
+       ("R" dap-ui-repl "repl"))
       "Breakpoints"
-      (("b" dape-breakpoint-toggle "toggle")
-       ("l" dape-breakpoint-log "log")
-       ("e" dape-breakpoint-expression "expression")
-       ("B" dape-breakpoint-remove-all "clear"))
+      (("b" dap-breakpoint-toggle "toggle")
+       ("l" dap-breakpoint-log-message "log")
+       ("e" dap-breakpoint-condition "condition")
+       ("h" dap-breakpoint-hit-condition "hit count")
+       ("B" dap-breakpoint-delete-all "clear"))
       "Debug"
-      (("d" dape "dape")
-       ("Q" dape-quit "quit" :exit t))))
+      (("d" dap-debug "debug")
+       ("E" dap-debug-edit-template "edit template")
+       ("L" dap-debug-last "debug last")
+       ("Q" dap-disconnect "quit" :exit t))))
     :config
+    ;; Enable dap-mode globally
+    (dap-mode 1)
+
+    ;; Enable dap-ui-mode for additional debugging UI
+    (dap-ui-mode 1)
+
+    ;; Enable tooltip support (hover to see variable values)
+    (tooltip-mode 1)
+
     ;; Save buffers on startup, useful for interpreted languages
-    (add-hook 'dape-on-start-hooks
-              (defun dape--save-on-start ()
+    (add-hook 'dap-stopped-hook
+              (defun dap--save-on-start ()
                 (save-some-buffers t t)))
-    ;; Display hydra on startup
-    (add-hook 'dape-on-start-hooks #'dape-hydra/body)))
+
+    ;; Display hydra when debugger stops (e.g., at breakpoint)
+    (add-hook 'dap-stopped-hook
+              (lambda (arg) (call-interactively #'dap-hydra/body)))))
 
 (provide 'init-dap)
 

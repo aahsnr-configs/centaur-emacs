@@ -42,7 +42,7 @@
 - [-] init-ibuffer.el
      - [ ] change keybinding for launching ibuffer
 - [-] init-kill-ring.el
-- [ ] init-lsp.el
+- [-] init-lsp.el [Changed: Many]
      - [ ] make sure it does not conflict with scimax
 - [x] init-markdown.el
 - [-] init-org.el

@@ -11,7 +11,7 @@
 ## Files/Modules - Centaur Emacs
 - [ ] init.el [Changed]
 - [ ] init-ai.el
-- [x] init-base.el [Changed visible-bell back to t]
+- [ ] init-base.el [Changed visible-bell back to t]
 - [x] init-bookmark.el
 - [ ] init-c.el
 - [ ] init-calendar.el
@@ -70,7 +70,7 @@
       - [ ] add evil inspired keybindings for window management
 - [x] init-workspace.el
 
-## Needed Modules - Scimax 
+## Needed Modules - Scimax
 - [ ] scimax-jinx.el
 - [ ] words.el
 - [ ] scimax-md.el

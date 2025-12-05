@@ -49,10 +49,6 @@
 
 
 ;;; Code:
-
-(when (version< emacs-version "28.1")
-  (error "This requires Emacs 28.1 and above!"))
-
 ;;
 ;; Speed up Startup Process
 ;;
@@ -126,6 +122,9 @@ Avoid placing large files like EAF in `site-lisp` to prevent slow startup."
 (require 'init-workspace)
 (require 'init-window)
 (require 'init-treemacs)
+
+(require 'init-eshell)
+(require 'init-shell)
 
 (require 'init-markdown)
 (require 'init-org)

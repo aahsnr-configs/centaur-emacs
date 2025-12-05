@@ -36,37 +36,9 @@
 (when emacs/>=29p
   (use-package dap-mode
     :bind (("<f5>" . dap-debug)
-           ("M-<f5>" . dap-hydra/body))
+           ("M-<f5>" . dap-hydra))
     :custom
-    ;; Enable only the features you want
     (dap-auto-configure-features '(sessions locals controls tooltip))
-    :pretty-hydra
-    ((:title (pretty-hydra-title "Debug" 'codicon "nf-cod-debug")
-      :color pink :quit-key ("q" "C-g"))
-     ("Stepping"
-      (("n" dap-next "next")
-       ("s" dap-step-in "step in")
-       ("o" dap-step-out "step out")
-       ("c" dap-continue "continue")
-       ("k" dap-disconnect "disconnect")
-       ("r" dap-debug-restart "restart")
-       ("D" dap-delete-session "delete session"))
-      "Switch"
-      (("t" dap-switch-thread "thread")
-       ("w" dap-ui-expressions-add "watch")
-       ("S" dap-ui-sessions "sessions")
-       ("R" dap-ui-repl "repl"))
-      "Breakpoints"
-      (("b" dap-breakpoint-toggle "toggle")
-       ("l" dap-breakpoint-log-message "log")
-       ("e" dap-breakpoint-condition "condition")
-       ("h" dap-breakpoint-hit-condition "hit count")
-       ("B" dap-breakpoint-delete-all "clear"))
-      "Debug"
-      (("d" dap-debug "debug")
-       ("E" dap-debug-edit-template "edit template")
-       ("L" dap-debug-last "debug last")
-       ("Q" dap-disconnect "quit" :exit t))))
     :config
     ;; Enable dap-mode globally
     (dap-mode 1)
@@ -77,6 +49,9 @@
     ;; Enable tooltip support (hover to see variable values)
     (tooltip-mode 1)
 
+    ;; Load the built-in dap-hydra
+    (require 'dap-hydra)
+
     ;; Save buffers on startup, useful for interpreted languages
     (add-hook 'dap-stopped-hook
               (defun dap--save-on-start ()
@@ -84,9 +59,67 @@
 
     ;; Display hydra when debugger stops (e.g., at breakpoint)
     (add-hook 'dap-stopped-hook
-              (lambda (arg) (call-interactively #'dap-hydra/body)))))
+              (lambda (arg) (call-interactively #'dap-hydra)))))
 
 (provide 'init-dap)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; (eval-when-compile
+;;   (require 'init-const))
+
+;; (when emacs/>=29p
+;;   (use-package dap-mode
+;;     :bind (("<f5>" . dap-debug)
+;;            ("M-<f5>" . dap-hydra/body))
+;;     :custom
+;;     ;; Enable only the features you want
+;;     (dap-auto-configure-features '(sessions locals controls tooltip))
+;;     :pretty-hydra
+;;     ((:title (pretty-hydra-title "Debug" 'codicon "nf-cod-debug")
+;;       :color pink :quit-key ("q" "C-g"))
+;;      ("Stepping"
+;;       (("n" dap-next "next")
+;;        ("s" dap-step-in "step in")
+;;        ("o" dap-step-out "step out")
+;;        ("c" dap-continue "continue")
+;;        ("k" dap-disconnect "disconnect")
+;;        ("r" dap-debug-restart "restart")
+;;        ("D" dap-delete-session "delete session"))
+;;       "Switch"
+;;       (("t" dap-switch-thread "thread")
+;;        ("w" dap-ui-expressions-add "watch")
+;;        ("S" dap-ui-sessions "sessions")
+;;        ("R" dap-ui-repl "repl"))
+;;       "Breakpoints"
+;;       (("b" dap-breakpoint-toggle "toggle")
+;;        ("l" dap-breakpoint-log-message "log")
+;;        ("e" dap-breakpoint-condition "condition")
+;;        ("h" dap-breakpoint-hit-condition "hit count")
+;;        ("B" dap-breakpoint-delete-all "clear"))
+;;       "Debug"
+;;       (("d" dap-debug "debug")
+;;        ("E" dap-debug-edit-template "edit template")
+;;        ("L" dap-debug-last "debug last")
+;;        ("Q" dap-disconnect "quit" :exit t))))
+;;     :config
+;;     ;; Enable dap-mode globally
+;;     (dap-mode 1)
+
+;;     ;; Enable dap-ui-mode for additional debugging UI
+;;     (dap-ui-mode 1)
+
+;;     ;; Enable tooltip support (hover to see variable values)
+;;     (tooltip-mode 1)
+
+;;     ;; Save buffers on startup, useful for interpreted languages
+;;     (add-hook 'dap-stopped-hook
+;;               (defun dap--save-on-start ()
+;;                 (save-some-buffers t t)))
+
+;;     ;; Display hydra when debugger stops (e.g., at breakpoint)
+;;     (add-hook 'dap-stopped-hook
+;;               (lambda (arg) (call-interactively #'dap-hydra/body)))))
+
+;; (provide 'init-dap)
+
+;; ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; init-dap.el ends here

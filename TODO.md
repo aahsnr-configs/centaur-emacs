@@ -21,7 +21,7 @@
     - [ ] May need to change certain keybindings
 - [x] init-const.el [Unchanged]
 - [x] init-custom.el [Changed: default theme: tokyo-night]
-- [ ] init-dap.el
+- [x] init-dap.el [Changed: Dape to dap-mode]
 - [x] init-dashboard.el
 - [ ] init-dict.el
 - [x] init-dired.el
